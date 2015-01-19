@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.SampleRobot;
  */
 
 public class main extends SampleRobot {
-	
+
 	Driver fourCIMDrive;
 	Elevator lift;
 	/**
@@ -27,23 +27,25 @@ public class main extends SampleRobot {
 		fourCIMDrive = new Driver();
 		lift = new Elevator();
 	}
-	
-	
+
+
 	/**
 	 * Teleoperated configuration
 	 * Update each component each iteration through the ".teleopTick()" method
 	 */
+
+
+
 	public void operatorControl()
 	{
 		fourCIMDrive.teleopConfig();
 		lift.teleopConfig();
 		while (isOperatorControl())
 		{
-		fourCIMDrive.teleopTick();
-		lift.teleopTick();
+			fourCIMDrive.teleopTick();
+			lift.teleopTick();
 		}
 	}
-	
 	/**
 	 * Autonomous configuration
 	 * Update each component through the ".autonTick()" method
@@ -56,6 +58,6 @@ public class main extends SampleRobot {
 			fourCIMDrive.autonConfig();
 			lift.autonConfig();
 		}
-	
+
 	}
 }

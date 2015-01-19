@@ -1,6 +1,6 @@
 package org.usfirst.frc.team1389.robot;
 import edu.wpi.first.wpilibj.*;
-public class Elevator {
+public class Elevator implements phaseMethods{
 
 	static Joystick manip = Motors_Sensors.manip;
 	static Victor elevator = Motors_Sensors.elevatorOne;
@@ -86,5 +86,7 @@ public class Elevator {
 
 	public void autonConfig(){}
 	public void autonTick(){}
+
+	public void test() {}
 
 }

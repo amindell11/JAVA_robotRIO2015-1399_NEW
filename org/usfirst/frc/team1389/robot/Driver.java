@@ -1,7 +1,7 @@
 package org.usfirst.frc.team1389.robot;
 import edu.wpi.first.wpilibj.*;
 
-public class Driver {
+public class Driver implements phaseMethods{
 
 	
 	static Talon leftDrive = Motors_Sensors.leftDrive;
@@ -33,5 +33,7 @@ public class Driver {
 	 * Instructions for drive train at each autonomous tick. 
 	 */
 	public void autonTick(){}
+
+	public void test() {}
 	
 }
