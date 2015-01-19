@@ -9,11 +9,17 @@ http://first.wpi.edu/FRC/roborio/release/docs/java/
 Noteable Changes Between Java and C++
 ======================================
 Since team 1380 has been using C++ for years, here are the notable changes from jumping from C++ to java 
-	- Java does not use pointers, so do not use the "*" parameter when declaring an object.
+
+	-Java does not use pointers, so do not use the "*" parameter when declaring an object.
+	
 	- Again, because we are no longer using pointers, use the "." operator instead of "->" when trying to access members of an object.
+	
 	- All WPILib syntax is now in camel case (camelCase vs. NotCamelCase)
+	
 	- Instead of using macros, we are using static final variables declared in "Constants.java"
+	
 	- We no longer used the START_ROBOT_CLASS(mainClass) function. The Class that inherits sample robot, iterative robot, etc. is automatically the main class.
+	
 	- Inheritance no longer uses the ":" operator, it now uses the "extends" operator
 
 Setting Up Eclipse with WPILib for the 2015 season
