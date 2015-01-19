@@ -5,7 +5,8 @@ public class Motors_Sensors {
 	static Joystick drive, manip;
 	static Talon rightDrive, leftDrive;
 	static Victor elevatorOne;
-	static DigitalInput IRa, IRb, IRc, IRd, IRe;
+	static DigitalInput IRa, IRb, IRc, IRd, IRe, limitOne, limitTwo;
+	static Encoder encodeOne, encodeTwo;
 
 	/**
 	 * Initialize all static components
@@ -23,5 +24,12 @@ public class Motors_Sensors {
 		IRc = new DigitalInput(Constants.INFRARED_THREE);
 		IRd = new DigitalInput(Constants.INFRARED_FOUR);
 		IRe = new DigitalInput(Constants.INFRARED_FIVE);
+		
+		limitOne = new DigitalInput(Constants.LIMIT_ONE);
+		limitTwo = new DigitalInput(Constants.LIMIT_TWO);
+		
+		encodeOne = new Encoder(Constants.ENCODER_ONE / 10, Constants.ENCODER_ONE - Constants.ENCODER_TWO / 10 * 10);
+		encodeTwo = new Encoder(Constants.ENCODER_TWO / 10, Constants.ENCODER_TWO - Constants.ENCODER_TWO / 10 * 10);
+	
 	}
 }

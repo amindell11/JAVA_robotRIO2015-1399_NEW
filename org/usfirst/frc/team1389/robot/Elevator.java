@@ -55,8 +55,6 @@ public class Elevator implements phaseMethods{
 			direction = getDirection(3);
 			elevator.set(direction * Constants.ELEVATOR_SPEED_MOD);
 		}
-			
-
 	}
 
 /** 

@@ -47,11 +47,18 @@ public class Constants {
 	
 	//IR Sensor Digital Ports
 	static final int INFRARED_ONE         = 0;
-	static final int INFRARED_TWO         = 0;
-	static final int INFRARED_THREE       = 0;
-	static final int INFRARED_FOUR        = 0;
-	static final int INFRARED_FIVE        = 0;
-
+	static final int INFRARED_TWO         = 1;
+	static final int INFRARED_THREE       = 2;
+	static final int INFRARED_FOUR        = 3;
+	static final int INFRARED_FIVE        = 4;
+	
+	//Limit Switch Digital Ports
+	static final int LIMIT_ONE            = 5;
+	static final int LIMIT_TWO            = 6;
+	
+	//Encoder Digital Ports
+	static final int ENCODER_ONE          = 78;
+	static final int ENCODER_TWO          = 01;
 
 	//Values
 	static final float LIMITER            = (float) Math.sqrt(2); 
