@@ -6,7 +6,6 @@ public class EncoderControl implements phaseMethods{
 	
 	//static Encoder encodeOne = Motors_Sensors.encodeOne;
 	//static Encoder encodeTwo = Motors_Sensors.encodeTwo;
-
 	public void test() {}
 
 	public void autonConfig() {}

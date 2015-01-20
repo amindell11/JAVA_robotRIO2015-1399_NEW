@@ -31,6 +31,10 @@ public class Constants {
 	//Joystick USB ports
 	static final int DRIVE_JOY            = 0;
 	static final int MANIP_JOY            = 1;
+	
+	//Analog Sensor Ports
+	static final int ACCCEL				  = 0;
+	static final int GYRO				  = 1;
 
 	//Joystick input values
 	static final int ButtonX 			  = 3; // XBox Controller X Button number for getRawButton= or getRawAxis=

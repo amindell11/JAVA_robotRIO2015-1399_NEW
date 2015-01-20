@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1389.robot;
 import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Elevator implements phaseMethods{
 
 	static Joystick manip = Motors_Sensors.manip;
@@ -24,7 +25,9 @@ public class Elevator implements phaseMethods{
 	public void teleopTick()
 	{
 		
-		sense[0] = !IRa.get(); sense[1] = !IRb.get(); sense[2] = !IRc.get(); sense[3] = !IRd.get(); sense[4] = !IRe.get(); 
+		sense[0] = !IRa.get(); sense[1] = !IRb.get(); sense[2] = !IRc.get(); sense[3] = !IRd.get(); sense[4] = !IRe.get();
+		
+		SmartDashboard.putBoolean("IR One value", sense[0]);
 		if (!IRa.get() || !IRb.get() || !IRc.get() || !IRd.get() || !IRe.get())
 		{
 			lastSense[0] = !IRa.get(); lastSense[1] = !IRb.get(); lastSense[2] = !IRc.get(); lastSense[3] = !IRd.get(); lastSense[4] = !IRe.get();
