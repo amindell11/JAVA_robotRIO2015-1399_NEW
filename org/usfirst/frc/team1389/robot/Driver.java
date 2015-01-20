@@ -5,8 +5,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Driver implements phaseMethods{
 
 	
-	static Talon leftDrive = Motors_Sensors.leftDrive;
-	static Talon rightDrive = Motors_Sensors.rightDrive;
+	static Talon RFDrive = Motors_Sensors.RFDrive;
+	static Talon RBDrive = Motors_Sensors.RBDrive;
+	static Talon LFDrive = Motors_Sensors.LFDrive;
+	static Talon LBDrive = Motors_Sensors.LBDrive;
 	static Joystick driver = Motors_Sensors.drive;
 	static DigitalInput limitOne = Motors_Sensors.limitOne;
 	static DigitalInput limitTwo = Motors_Sensors.limitTwo;
@@ -22,12 +24,18 @@ public class Driver implements phaseMethods{
 	public void teleopTick()
 	{
 		float x = (float) driver.getRawAxis(Constants.LeftX);
-		float y = (float) driver.getRawAxis(Constants.LeftY);
+		float y = (float) driver.getRawAxis(Constants.LeftY) * -1;
 		SmartDashboard.putNumber("Driver LeftX", x);
 		SmartDashboard.putNumber("Driver LeftY", y);
+		
+		SmartDashboard.putNumber("Left Power", (y + x) / Constants.LIMITER);
+		SmartDashboard.putNumber("Right Power", (y - x) / Constants.LIMITER);
+		
 		x += selfTurn();
-		leftDrive.set((y - x) / Constants.LIMITER);
-		rightDrive.set((y - x) / Constants.LIMITER);
+		LFDrive.set((y + x) / Constants.LIMITER);
+		LBDrive.set((y + x) / Constants.LIMITER);
+		RFDrive.set((y - x) / Constants.LIMITER);
+		RBDrive.set((y - x) / Constants.LIMITER);
 	}
 	
 	public float selfTurn()

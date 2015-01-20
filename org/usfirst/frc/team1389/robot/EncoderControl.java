@@ -4,8 +4,8 @@ import edu.wpi.first.wpilibj.Encoder;
 
 public class EncoderControl implements phaseMethods{
 	
-	static Encoder encodeOne = Motors_Sensors.encodeOne;
-	static Encoder encodeTwo = Motors_Sensors.encodeTwo;
+	//static Encoder encodeOne = Motors_Sensors.encodeOne;
+	//static Encoder encodeTwo = Motors_Sensors.encodeTwo;
 
 	public void test() {}
 

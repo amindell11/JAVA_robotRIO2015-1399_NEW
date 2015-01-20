@@ -3,7 +3,7 @@ import edu.wpi.first.wpilibj.*;
 
 public class Motors_Sensors {
 	static Joystick drive, manip;
-	static Talon rightDrive, leftDrive;
+	static Talon RFDrive, RBDrive, LFDrive, LBDrive;
 	static Victor elevatorOne;
 	static DigitalInput IRa, IRb, IRc, IRd, IRe, limitOne, limitTwo;
 	static Encoder encodeOne, encodeTwo;
@@ -12,8 +12,10 @@ public class Motors_Sensors {
 	 * Initialize all static components
 	 */
 	public static void init(){
-		rightDrive = new Talon(Constants.RIGHT_PWM_DRIVE);
-		leftDrive = new Talon(Constants.LEFT_PWM_DRIVE);
+		RFDrive = new Talon(Constants.RF_PWM_DRIVE);
+		RBDrive = new Talon(Constants.RB_PWM_DRIVE);
+		LFDrive = new Talon(Constants.LF_PWM_DRIVE);
+		LBDrive = new Talon(Constants.LB_PWM_DRIVE);
 		elevatorOne = new Victor(Constants.ELEVATOR_PWM);
 
 		drive = new Joystick(Constants.DRIVE_JOY);
@@ -27,9 +29,8 @@ public class Motors_Sensors {
 		
 		limitOne = new DigitalInput(Constants.LIMIT_ONE);
 		limitTwo = new DigitalInput(Constants.LIMIT_TWO);
-		
-		encodeOne = new Encoder(Constants.ENCODER_ONE / 10, Constants.ENCODER_ONE - Constants.ENCODER_TWO / 10 * 10);
-		encodeTwo = new Encoder(Constants.ENCODER_TWO / 10, Constants.ENCODER_TWO - Constants.ENCODER_TWO / 10 * 10);
+		//encodeOne = new Encoder(Constants.ENCODER_ONE / 10, Constants.ENCODER_ONE - Constants.ENCODER_TWO / 10 * 10);
+		//encodeTwo = new Encoder(Constants.ENCODER_TWO / 10, Constants.ENCODER_TWO - Constants.ENCODER_TWO / 10 * 10);
 	
 	}
 }

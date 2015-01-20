@@ -22,9 +22,11 @@ package org.usfirst.frc.team1389.robot;
 public class Constants {
 
 	//Motor PWM ports
-	static final int RIGHT_PWM_DRIVE      = 0;
-	static final int LEFT_PWM_DRIVE       = 1;
-	static final int ELEVATOR_PWM         = 2;
+	static final int RB_PWM_DRIVE         = 1;
+	static final int RF_PWM_DRIVE         = 2;
+	static final int LF_PWM_DRIVE         = 3;
+	static final int LB_PWM_DRIVE         = 4;
+	static final int ELEVATOR_PWM         = 0;
 	
 	//Joystick USB ports
 	static final int DRIVE_JOY            = 0;
@@ -61,7 +63,7 @@ public class Constants {
 	static final int ENCODER_TWO          = 01;
 
 	//Values
-	static final float LIMITER            = (float) Math.sqrt(2); 
+	static final float LIMITER            = (float) 1.45; //Approximately sqrt(2)
 	static final float ELEVATOR_SPEED_MOD = 1;
 
 }

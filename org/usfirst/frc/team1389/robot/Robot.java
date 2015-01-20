@@ -13,19 +13,19 @@ import edu.wpi.first.wpilibj.SampleRobot;
  * @author Paul LoBuglio
  */
 
-public class main extends SampleRobot {
+public class Robot extends SampleRobot {
 	
 	Driver fourCIMDrive;
-	Elevator lift;
+	//Elevator lift;
 	/**
 	 * Instantiates all static motors and sensors. 
 	 * Instantiates all component objects
 	 */
-	public main()
+	public Robot()
 	{
 		Motors_Sensors.init();
 		fourCIMDrive = new Driver();
-		lift = new Elevator();
+		//lift = new Elevator();
 	}
 	
 	
@@ -35,27 +35,31 @@ public class main extends SampleRobot {
 	 */
 	public void operatorControl()
 	{
-		fourCIMDrive.teleopConfig();
-		lift.teleopConfig();
+		
+		//fourCIMDrive.teleopConfig();
+		//lift.teleopConfig();
 		while (isOperatorControl())
 		{
 		fourCIMDrive.teleopTick();
-		lift.teleopTick();
+		//lift.teleopTick();
 		}
+		
 	}
 	
 	/**
 	 * Autonomous configuration
 	 * Update each component through the ".autonTick()" method
 	 */
+	
+	
 	public void autonomous() {
-		fourCIMDrive.autonConfig();
+		/*fourCIMDrive.autonConfig();
 		lift.autonConfig();
 		while (isAutonomous())
 		{
 			fourCIMDrive.autonConfig();
 			lift.autonConfig();
-		}
+		}*/
 	
 	}
 }
