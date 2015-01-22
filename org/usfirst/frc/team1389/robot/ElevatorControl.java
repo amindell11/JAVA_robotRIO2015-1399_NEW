@@ -2,21 +2,22 @@ package org.usfirst.frc.team1389.robot;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class ElevatorControl extends Component{
-
 	
+	SpeedController elevator= new Victor(Constants.ELEVATOR_PWM);
 	//Our IR sensors output low when an object is within 2cm - 10cm of an object (e. g. !IRa.get() equates to true when there is an object in front of sensor one) 
 	//Sense stores the boolean returns of each IR sensor, updating each tick. Last sense is the same as sense,
 	//but values only update when a IR sensor is passed
-	int direction;
-	DigitalSwitch[] stateSave;
-
-	public void teleopConfig(){}
 	
-	public void teleopTick(InputState state)
-	{
+	public void teleopConfig(){
+	}
+	public void teleopTick(InputState state){
+		DigitalSwitch[] sensors=state.getInfared();
+		int lastSensor=0;
+		for(int d=0;d<sensors.length;d++){
+			if(!sensors[d].isOn())lastSensor=d;
+		}
 		SmartDashboard.putBoolean("IR One value", state.getInfared()[0].isOn());
-		stateSave=state.getInfared().clone();
-		elevator.set(direction() * Constants.ELEVATOR_SPEED_MOD);
+		elevator.set(direction(state, sensors, lastSensor) * Constants.ELEVATOR_SPEED_MOD);
 	}
 
 
@@ -27,57 +28,46 @@ public class ElevatorControl extends Component{
 	is the same as the last IR recognized
  * @return -1 represents down, 
  */
-	public int getDirection(int senseID, InputState state)
+	public int whereToGo(int senseID, int lastSensor)
 	{
-		
-		 
-		
-		for (int i = 0; i < state.getInfared().length; i++)
-		{
-			if (stateSave[i])
-			{
-				if (i < senseID)
-					return 1;
-				if (i > senseID)
-					return -1;
-				if (i == senseID)
-					return direction * -1;
-			}
+		if (lastSensor > senseID){ //above the requested spot
+			return 1;
 		}
-		return 0;
+		else if (lastSensor < senseID){ //below the requested spot
+			return -1;
+		}
+		else{
+			return 0;
+		}
 
 	}
-	public int direction(InputState state){
-		if (!IRa.get() || !IRb.get() || !IRc.get() || !IRd.get() || !IRe.get())
-		{
-			lastSense[0] = !IRa.get(); lastSense[1] = !IRb.get(); lastSense[2] = !IRc.get(); lastSense[3] = !IRd.get(); lastSense[4] = !IRe.get();
-		}
+	public int direction(InputState state,DigitalSwitch[] sensors, int lastSensor){
 		
-		if (state.getManip().getLeftY() > .4 && !sense[4])
+		if (state.getManip().getLeftY() > .4 && !sensors[4].isOn())
 		{
-			direction = 1;
+			return 1;
 		}
-		if (state.getManip().getLeftY() < -.4 && !sense[0])
+		else if (state.getManip().getLeftY() < -.4 && !sensors[0].isOn())
 		{
-			direction = -1;
+			return -1;
 		}
-		if (state.getManip().isButtonA() && !sense[1])
+		else if (state.getManip().isButtonA() && !sensors[1].isOn())
 		{
-			direction = getDirection(1);
+			return whereToGo(1, lastSensor);
 		}
-		if (state.getManip().isButtonX() && !sense[2])
+		else if (state.getManip().isButtonX() && !sensors[2].isOn())
 		{
-			direction = getDirection(2);
+			return whereToGo(2, lastSensor);
 		}
-		if (state.getManip().isButtonB() && !sense[3])
+		else if (state.getManip().isButtonB() && !sensors[3].isOn())
 		{
-			direction = getDirection(3);
+			return whereToGo(3, lastSensor);
 		}
+		return 0;
 	}
 
 	public void autonConfig(){}
 	public void autonTick(){}
-
 	public void test() {}
 
 }
