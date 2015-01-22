@@ -2,7 +2,7 @@ package org.usfirst.frc.team1389.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 
-public class XBoxController{
+public class XBoxController implements Cloneable{
 	private Joystick stick;
 	private boolean buttonX; // XBox Controller X Button number for getRawButton= or getRawAxis=
 	private boolean buttonA; // XBox Controller A Button number
@@ -34,6 +34,9 @@ public class XBoxController{
 		bumperL = stick.getRawButton(Constants.BumperL); 
 		bumperR = stick.getRawButton(Constants.BumperR);
 	}
+	 protected XBoxController clone() throws CloneNotSupportedException {
+	       return (XBoxController) super.clone();
+	 }
 	public Joystick getStick() {
 		return stick;
 	}

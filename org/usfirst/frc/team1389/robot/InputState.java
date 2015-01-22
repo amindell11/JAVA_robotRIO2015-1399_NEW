@@ -1,29 +1,60 @@
 package org.usfirst.frc.team1389.robot;
 
-import edu.wpi.first.wpilibj.AnalogAccelerometer;
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Gyro;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.Victor;
-
 public class InputState implements Cloneable{
 	private XBoxController drive;
-	//private XBoxController manip;
-	/**
-	 * Initialize all static components
-	 */
+	private XBoxController manip;
+	
+	private DigitalSwitch limit1;
+	private DigitalSwitch limit2;
+	
+	private DigitalSwitch[] infared;
+	
 	public InputState(){
-		drive = new XBoxController(0);
-		drive = new XBoxController(1);
+		drive = new XBoxController(Constants.DRIVE_JOY);
+		manip = new XBoxController(Constants.MANIP_JOY);
+		
+		limit1 = new DigitalSwitch(Constants.LIMIT_ONE);
+		limit2 = new DigitalSwitch(Constants.LIMIT_TWO);
+		
+		infared[1]= new DigitalSwitch(Constants.INFRARED_ONE);
+		infared[2]= new DigitalSwitch(Constants.INFRARED_TWO);
+		infared[3]= new DigitalSwitch(Constants.INFRARED_THREE);
+		infared[4]= new DigitalSwitch(Constants.INFRARED_FOUR);
+		infared[5]= new DigitalSwitch(Constants.INFRARED_FIVE);
 	}
 	
 	public void tick() {
 		
 	}
 	 protected InputState clone() throws CloneNotSupportedException {
-	        return (InputState) super.clone();
+	        InputState newState = (InputState) super.clone();
+	        newState.drive = drive.clone();
+	        newState.manip = manip.clone();
+	        newState.limit1 = limit1.clone();
+	        newState.limit2 = limit2.clone();
+	        return newState;
 	 }
+	 
+
+	public DigitalSwitch[] getInfared() {
+		return infared;
+	}
+
+	public DigitalSwitch getLimit1() {
+		return limit1;
+	}
+
+	public DigitalSwitch getLimit2() {
+		return limit2;
+	}
+
+	public XBoxController getDrive() {
+		return drive;
+	}
+
+	public XBoxController getManip() {
+		return manip;
+	}
+	 
 
 }

@@ -7,26 +7,18 @@ public class ElevatorControl extends Component{
 	//Our IR sensors output low when an object is within 2cm - 10cm of an object (e. g. !IRa.get() equates to true when there is an object in front of sensor one) 
 	//Sense stores the boolean returns of each IR sensor, updating each tick. Last sense is the same as sense,
 	//but values only update when a IR sensor is passed
-	boolean [] lastSense = {!IRa.get(), !IRb.get(), !IRc.get(), !IRd.get(), !IRe.get()};
-	boolean []sense = new boolean [5];
 	int direction;
+	DigitalSwitch[] stateSave;
 
 	public void teleopConfig(){}
 	
 	public void teleopTick(InputState state)
 	{
-		getIRSensorStates();	
-		SmartDashboard.putBoolean("IR One value", sense[0]);
+		SmartDashboard.putBoolean("IR One value", state.getInfared()[0].isOn());
+		stateSave=state.getInfared().clone();
 		elevator.set(direction() * Constants.ELEVATOR_SPEED_MOD);
 	}
 
-private void getIRSensorStates() {
-		sense[0] = !IRa.get();
-		sense[1] = !IRb.get(); 
-		sense[2] = !IRc.get(); 
-		sense[3] = !IRd.get(); 
-		sense[4] = !IRe.get();
-	}
 
 /** 
  * When input is given to bring the elevator to a specified level, this function provides the direction necessary to do so.
@@ -35,11 +27,14 @@ private void getIRSensorStates() {
 	is the same as the last IR recognized
  * @return -1 represents down, 
  */
-	public int getDirection(int senseID)
+	public int getDirection(int senseID, InputState state)
 	{
-		for (int i = 0; i < lastSense.length; i++)
+		
+		 
+		
+		for (int i = 0; i < state.getInfared().length; i++)
 		{
-			if (lastSense[i])
+			if (stateSave[i])
 			{
 				if (i < senseID)
 					return 1;
@@ -58,23 +53,23 @@ private void getIRSensorStates() {
 			lastSense[0] = !IRa.get(); lastSense[1] = !IRb.get(); lastSense[2] = !IRc.get(); lastSense[3] = !IRd.get(); lastSense[4] = !IRe.get();
 		}
 		
-		if (state.getManip().getRawAxis(Constants.LeftY) > .4 && !sense[4])
+		if (state.getManip().getLeftY() > .4 && !sense[4])
 		{
 			direction = 1;
 		}
-		if (state.getManip().getRawAxis(Constants.LeftY) < -.4 && !sense[0])
+		if (state.getManip().getLeftY() < -.4 && !sense[0])
 		{
 			direction = -1;
 		}
-		if (state.getManip().getRawButton(Constants.ButtonA) && !sense[1])
+		if (state.getManip().isButtonA() && !sense[1])
 		{
 			direction = getDirection(1);
 		}
-		if (state.getManip().getRawButton(Constants.ButtonX) && !sense[2])
+		if (state.getManip().isButtonX() && !sense[2])
 		{
 			direction = getDirection(2);
 		}
-		if (state.getManip().getRawButton(Constants.ButtonB) && !sense[3])
+		if (state.getManip().isButtonB() && !sense[3])
 		{
 			direction = getDirection(3);
 		}

@@ -28,7 +28,7 @@ public class Robot extends SampleRobot {
 	 */
 	public Robot()
 	{
-		state =new InputState();
+		state = new InputState();
 		components.add(new DriveControl());
 		components.add(new ElevatorControl());
 		components.add(new EncoderControl());
