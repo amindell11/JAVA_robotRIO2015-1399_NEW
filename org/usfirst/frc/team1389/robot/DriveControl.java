@@ -2,7 +2,7 @@ package org.usfirst.frc.team1389.robot;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class Driver implements phaseMethods{
+public class DriveControl extends Component{
 
 	
 	static Talon RFDrive = Motors_Sensors.RFDrive;
@@ -59,7 +59,7 @@ public class Driver implements phaseMethods{
 	 * Instructions for drive train at each autonomous tick. 
 	 */
 	public void autonTick(){}
-
-	public void test() {}
-	
+	public void test(){
+		
+	}
 }

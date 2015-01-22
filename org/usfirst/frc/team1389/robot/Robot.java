@@ -1,5 +1,7 @@
 package org.usfirst.frc.team1389.robot;
 
+import java.util.ArrayList;
+
 import edu.wpi.first.wpilibj.SampleRobot;
 
 /**
@@ -15,17 +17,21 @@ import edu.wpi.first.wpilibj.SampleRobot;
 
 public class Robot extends SampleRobot {
 	
-	Driver fourCIMDrive;
-	//Elevator lift;
+	//instance variables
+	ArrayList<Component> components;
+	InputState state;
+	
+	
 	/**
 	 * Instantiates all static motors and sensors. 
 	 * Instantiates all component objects
 	 */
 	public Robot()
 	{
-		Motors_Sensors.init();
-		fourCIMDrive = new Driver();
-		//lift = new Elevator();
+		state =new InputState();
+		components.add(new DriveControl());
+		components.add(new ElevatorControl());
+		components.add(new EncoderControl());
 	}
 	
 	
@@ -35,13 +41,12 @@ public class Robot extends SampleRobot {
 	 */
 	public void operatorControl()
 	{
-		
-		//fourCIMDrive.teleopConfig();
-		//lift.teleopConfig();
 		while (isOperatorControl())
 		{
-		fourCIMDrive.teleopTick();
-		//lift.teleopTick();
+			state.tick();
+			for (Component c: components){
+				c.teleopTick(state);
+			}
 		}
 		
 	}
@@ -50,16 +55,7 @@ public class Robot extends SampleRobot {
 	 * Autonomous configuration
 	 * Update each component through the ".autonTick()" method
 	 */
-	
-	
 	public void autonomous() {
-		/*fourCIMDrive.autonConfig();
-		lift.autonConfig();
-		while (isAutonomous())
-		{
-			fourCIMDrive.autonConfig();
-			lift.autonConfig();
-		}*/
-	
+		//TODO
 	}
 }
