@@ -41,7 +41,7 @@ public class Constants {
 	static final int RF_PWM_DRIVE         = 3;
 	static final int LF_PWM_DRIVE         = 2;
 	static final int LB_PWM_DRIVE         = 1;
-	static final int ELEVATOR_PWM         = 0;
+	static final int ELEVATOR_PWM         = 13;
 	
 	//Joystick USB ports
 	static final int DRIVE_JOY            = 0;
@@ -65,8 +65,8 @@ public class Constants {
 	//Encoder Digital Ports
 	static final int ENCODER_1A           = 8;
 	static final int ENCODER_1B           = 9;
-	static final int ENCODER_2A           = 0;
-	static final int ENCODER_2B           = 0;
+	static final int ENCODER_2A           = 10;
+	static final int ENCODER_2B           = 11;
 
 	//Values
 	static final float LIMITER            = (float) 3; //Approximately sqrt(2)

@@ -49,7 +49,11 @@ public class Robot extends SampleRobot {
 		}
 		while (isOperatorControl())
 		{
+			
 			state.tick();
+			if(state.getDrive().isButtonY())
+				
+			
 			for (Component c: components){
 				c.teleopTick(state);
 			}

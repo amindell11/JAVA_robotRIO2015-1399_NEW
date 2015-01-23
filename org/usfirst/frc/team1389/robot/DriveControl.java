@@ -40,7 +40,7 @@ public class DriveControl extends Component{
 		x += selfTurn(state);
 		double leftVel=(y + x) / Constants.LIMITER;
 		double rightVel=(y - x) / Constants.LIMITER * -1;
-		VerifyVelocity(leftVel,rightVel,state.getEncoder1(),state.getEncoder2());
+		//VerifyVelocity(leftVel,rightVel,state.getEncoder1(),state.getEncoder2());
 		LFDrive.set(leftVel);
 		LBDrive.set(leftVel);
 		RFDrive.set(rightVel);
@@ -49,8 +49,7 @@ public class DriveControl extends Component{
 
 	private void VerifyVelocity(double leftVel, double rightVel,
 		Encoder encoder1, Encoder encoder2) {
-		if(Math.abs((leftVel/rightVel)-(encoder1.getRate()/encoder2.getRate()))>.3){
-			
+		if((leftVel/rightVel)-(encoder1.getRate()/encoder2.getRate())>.3){
 		}
 	}
 
