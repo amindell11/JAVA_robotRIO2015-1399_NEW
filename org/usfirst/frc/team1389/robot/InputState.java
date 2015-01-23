@@ -1,28 +1,38 @@
 package org.usfirst.frc.team1389.robot;
 
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Encoder;
+
 public class InputState implements Cloneable{
 	private XBoxController drive;
 	private XBoxController manip;
 	
-	private DigitalSwitch limit1;
-	private DigitalSwitch limit2;
+	private Encoder encoder1;
+	private Encoder encoder2;
 	
-	private DigitalSwitch[] infared;
+	private DigitalInput limit1;
+	private DigitalInput limit2;
+	
+	
+	private DigitalInput[] infared;
 	
 	public InputState(){
 		drive = new XBoxController(Constants.DRIVE_JOY);
 		manip = new XBoxController(Constants.MANIP_JOY);
 		
-		limit1 = new DigitalSwitch(Constants.LIMIT_ONE);
-		limit2 = new DigitalSwitch(Constants.LIMIT_TWO);
+		encoder1 = new Encoder(Constants.ENCODER_1A,Constants.ENCODER_1B);
+		encoder1 = new Encoder(Constants.ENCODER_2A,Constants.ENCODER_2B);
 		
-		infared = new DigitalSwitch[5];
+		limit1 = new DigitalInput(Constants.LIMIT_ONE);
+		limit2 = new DigitalInput(Constants.LIMIT_TWO);
 		
-		infared[0]= new DigitalSwitch(Constants.INFRARED_ONE);
-		infared[1]= new DigitalSwitch(Constants.INFRARED_TWO);
-		infared[2]= new DigitalSwitch(Constants.INFRARED_THREE);
-		infared[3]= new DigitalSwitch(Constants.INFRARED_FOUR);
-		infared[4]= new DigitalSwitch(Constants.INFRARED_FIVE);
+		infared = new DigitalInput[5];
+		
+		infared[0]= new DigitalInput(Constants.INFRARED_ONE);
+		infared[1]= new DigitalInput(Constants.INFRARED_TWO);
+		infared[2]= new DigitalInput(Constants.INFRARED_THREE);
+		infared[3]= new DigitalInput(Constants.INFRARED_FOUR);
+		infared[4]= new DigitalInput(Constants.INFRARED_FIVE);
 	}
 	
 	public void tick() {
@@ -33,21 +43,19 @@ public class InputState implements Cloneable{
 	        InputState newState = (InputState) super.clone();
 	        newState.drive = drive.clone();
 	        newState.manip = manip.clone();
-	        newState.limit1 = limit1.clone();
-	        newState.limit2 = limit2.clone();
 	        return newState;
 	 }
 	 
 
-	public DigitalSwitch[] getInfared() {
+	public DigitalInput[] getInfared() {
 		return infared;
 	}
 
-	public DigitalSwitch getLimit1() {
+	public DigitalInput getLimit1() {
 		return limit1;
 	}
 
-	public DigitalSwitch getLimit2() {
+	public DigitalInput getLimit2() {
 		return limit2;
 	}
 
@@ -57,6 +65,14 @@ public class InputState implements Cloneable{
 
 	public XBoxController getManip() {
 		return manip;
+	}
+
+	public Encoder getEncoder1() {
+		return encoder1;
+	}
+
+	public Encoder getEncoder2() {
+		return encoder2;
 	}
 	 
 

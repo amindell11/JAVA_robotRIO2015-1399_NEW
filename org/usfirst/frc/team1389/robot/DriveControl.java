@@ -38,19 +38,29 @@ public class DriveControl extends Component{
 			SmartDashboard.putNumber("Left Power", (y + x) / Constants.LIMITER);
 			SmartDashboard.putNumber("Right Power", (y - x) / Constants.LIMITER);
 		x += selfTurn(state);
-		LFDrive.set((y + x) / Constants.LIMITER);
-		LBDrive.set((y + x) / Constants.LIMITER);
-		RFDrive.set((y - x) / Constants.LIMITER * -1);
-		RBDrive.set((y - x) / Constants.LIMITER * -1);
+		double leftVel=(y + x) / Constants.LIMITER;
+		double rightVel=(y - x) / Constants.LIMITER * -1;
+		VerifyVelocity(leftVel,rightVel,state.getEncoder1(),state.getEncoder2());
+		LFDrive.set(leftVel);
+		LBDrive.set(leftVel);
+		RFDrive.set(rightVel);
+		RBDrive.set(rightVel);
 	}
-	
+
+	private void VerifyVelocity(double leftVel, double rightVel,
+		Encoder encoder1, Encoder encoder2) {
+		if(Math.abs((leftVel/rightVel)-(encoder1.getRate()/encoder2.getRate()))>.3){
+			
+		}
+	}
+
 	public double selfTurn(InputState state)
 	{
-		if (state.getLimit1().isOn() ^ state.getLimit2().isOn())
+		if (state.getLimit1().get() ^ state.getLimit2().get())
 		{
-			if (state.getLimit1().isOn())
+			if (state.getLimit1().get())
 				return -.5;
-			if (state.getLimit2().isOn())
+			if (state.getLimit2().get())
 				return .5;
 		}
 		return 0;

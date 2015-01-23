@@ -11,12 +11,12 @@ public class ElevatorControl extends Component{
 	public void teleopConfig(){
 	}
 	public void teleopTick(InputState state){
-		DigitalSwitch[] sensors=state.getInfared();
+		DigitalInput[] sensors=state.getInfared();
 		int lastSensor=0;
 		for(int d=0;d<sensors.length;d++){
-			if(!sensors[d].isOn())lastSensor=d;
+			if(!sensors[d].get())lastSensor=d;
 		}
-		SmartDashboard.putBoolean("IR One value", state.getInfared()[0].isOn());
+		SmartDashboard.putBoolean("IR One value", state.getInfared()[0].get());
 		elevator.set(direction(state, sensors, lastSensor) * Constants.ELEVATOR_SPEED_MOD);
 	}
 
@@ -41,25 +41,25 @@ public class ElevatorControl extends Component{
 		}
 
 	}
-	public int direction(InputState state,DigitalSwitch[] sensors, int lastSensor){
+	public int direction(InputState state,DigitalInput[] sensors, int lastSensor){
 		
-		if (state.getManip().getLeftY() > .4 && !sensors[4].isOn())
+		if (state.getManip().getLeftY() > .4 && !sensors[4].get())
 		{
 			return 1;
 		}
-		else if (state.getManip().getLeftY() < -.4 && !sensors[0].isOn())
+		else if (state.getManip().getLeftY() < -.4 && !sensors[0].get())
 		{
 			return -1;
 		}
-		else if (state.getManip().isButtonA() && !sensors[1].isOn())
+		else if (state.getManip().isButtonA() && !sensors[1].get())
 		{
 			return whereToGo(1, lastSensor);
 		}
-		else if (state.getManip().isButtonX() && !sensors[2].isOn())
+		else if (state.getManip().isButtonX() && !sensors[2].get())
 		{
 			return whereToGo(2, lastSensor);
 		}
-		else if (state.getManip().isButtonB() && !sensors[3].isOn())
+		else if (state.getManip().isButtonB() && !sensors[3].get())
 		{
 			return whereToGo(3, lastSensor);
 		}

@@ -63,8 +63,10 @@ public class Constants {
 	static final int LIMIT_TWO            = 6;
 	
 	//Encoder Digital Ports
-	static final int ENCODER_ONE          = 78;
-	static final int ENCODER_TWO          = 01;
+	static final int ENCODER_1A           = 8;
+	static final int ENCODER_1B           = 9;
+	static final int ENCODER_2A           = 0;
+	static final int ENCODER_2B           = 0;
 
 	//Values
 	static final float LIMITER            = (float) 3; //Approximately sqrt(2)
