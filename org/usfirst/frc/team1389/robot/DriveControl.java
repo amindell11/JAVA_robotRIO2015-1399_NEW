@@ -4,8 +4,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveControl extends Component{
 
-	boolean invertedX;
-	boolean invertedY;
+	boolean invertedX = true;
+	boolean invertedY = false;
 	Talon RFDrive;
 	Talon RBDrive;
 	Talon LFDrive;
@@ -40,8 +40,8 @@ public class DriveControl extends Component{
 		x += selfTurn(state);
 		LFDrive.set((y + x) / Constants.LIMITER);
 		LBDrive.set((y + x) / Constants.LIMITER);
-		RFDrive.set((y - x) / Constants.LIMITER);
-		RBDrive.set((y - x) / Constants.LIMITER);
+		RFDrive.set((y - x) / Constants.LIMITER * -1);
+		RBDrive.set((y - x) / Constants.LIMITER * -1);
 	}
 	
 	public double selfTurn(InputState state)

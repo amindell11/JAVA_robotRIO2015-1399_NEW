@@ -3,6 +3,7 @@ package org.usfirst.frc.team1389.robot;
 import java.util.ArrayList;
 
 import edu.wpi.first.wpilibj.SampleRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * robotRIO code 2015 for FRC team 1389 now in Java!
@@ -28,6 +29,9 @@ public class Robot extends SampleRobot {
 	 */
 	public Robot()
 	{
+		
+		components = new ArrayList<Component>();
+		
 		state = new InputState();
 		components.add(new DriveControl());
 		components.add(new ElevatorControl());

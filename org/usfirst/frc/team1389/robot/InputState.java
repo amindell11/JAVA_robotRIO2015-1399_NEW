@@ -16,15 +16,18 @@ public class InputState implements Cloneable{
 		limit1 = new DigitalSwitch(Constants.LIMIT_ONE);
 		limit2 = new DigitalSwitch(Constants.LIMIT_TWO);
 		
-		infared[1]= new DigitalSwitch(Constants.INFRARED_ONE);
-		infared[2]= new DigitalSwitch(Constants.INFRARED_TWO);
-		infared[3]= new DigitalSwitch(Constants.INFRARED_THREE);
-		infared[4]= new DigitalSwitch(Constants.INFRARED_FOUR);
-		infared[5]= new DigitalSwitch(Constants.INFRARED_FIVE);
+		infared = new DigitalSwitch[5];
+		
+		infared[0]= new DigitalSwitch(Constants.INFRARED_ONE);
+		infared[1]= new DigitalSwitch(Constants.INFRARED_TWO);
+		infared[2]= new DigitalSwitch(Constants.INFRARED_THREE);
+		infared[3]= new DigitalSwitch(Constants.INFRARED_FOUR);
+		infared[4]= new DigitalSwitch(Constants.INFRARED_FIVE);
 	}
 	
 	public void tick() {
-		
+		drive.tick();
+		//TODO
 	}
 	 protected InputState clone() throws CloneNotSupportedException {
 	        InputState newState = (InputState) super.clone();

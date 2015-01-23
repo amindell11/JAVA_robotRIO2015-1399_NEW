@@ -22,9 +22,9 @@ public class XBoxController implements Cloneable{
 	}
 	public void tick(){
 		leftX = stick.getRawAxis(Constants.LeftX);
-		leftY = stick.getRawAxis(Constants.LeftX);
-		rightX = stick.getRawAxis(Constants.LeftX);
-		rightY = stick.getRawAxis(Constants.LeftX);
+		leftY = stick.getRawAxis(Constants.LeftY);
+		rightX = stick.getRawAxis(Constants.RightX);
+		rightY = stick.getRawAxis(Constants.RightY);
 		rightTrigger = stick.getRawButton(Constants.RightTrigger);
 		leftTrigger = stick.getRawButton(Constants.LeftTrigger);
 		buttonX = stick.getRawButton(Constants.LeftTrigger);
@@ -39,7 +39,7 @@ public class XBoxController implements Cloneable{
 	 }
 	public Joystick getStick() {
 		return stick;
-	}
+	} 
 	public boolean isButtonX() {
 		return buttonX;
 	}
