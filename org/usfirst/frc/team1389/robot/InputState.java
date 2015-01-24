@@ -52,6 +52,10 @@ public class InputState implements Cloneable{
 	 }
 	 
 
+	public Accelerometer getAccelerometer() {
+		return accelerometer;
+	}
+
 	public DigitalInput[] getInfared() {
 		return infared;
 	}
@@ -79,6 +83,6 @@ public class InputState implements Cloneable{
 	public Encoder getEncoder2() {
 		return encoder2;
 	}
-	 
+
 
 }
