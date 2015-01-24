@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.SampleRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -23,6 +24,7 @@ public class Robot extends SampleRobot {
 	//instance variables
 	ArrayList<Component> components;
 	InputState state;
+	Timer timer;
 		
 	/**
 	 * Instantiates all static motors and sensors. 
@@ -30,14 +32,13 @@ public class Robot extends SampleRobot {
 	 */
 	public Robot()
 	{
-		
+		timer = new Timer();
 		components = new ArrayList<Component>();
 		state = new InputState();
 		components.add(new DriveControl());
 		components.add(new ElevatorControl());
 		SmartDashboard.putString("components:", components.toString());
 	}
-	
 	
 	/**
 	 * Teleoperated configuration
@@ -51,11 +52,11 @@ public class Robot extends SampleRobot {
 		while (isOperatorControl())
 		{
 			state.tick();
-			SmartDashboard.putNumber("acceleration:",state.getAccelerometer().getX());
-			//SmartDashboard.putBoolean("dig 0", new DigitalInput(0).get());
+			SmartDashboard.putNumber("Acceleration:",state.getAccelerometer().getX());
 			for (Component c: components){
 				c.teleopTick(state);
 			}
+			timer.delay(.05);
 		}
 		
 	}
