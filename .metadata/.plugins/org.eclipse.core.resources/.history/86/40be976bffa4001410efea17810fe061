@@ -1,0 +1,12 @@
+package org.usfirst.frc.team1389.robot;
+
+import java.util.ArrayList;
+
+public class Storage {
+	static ArrayList<Component> components;
+	static InputState state;
+	static Control control;
+	static Component drive=new DriveComponent();
+	static Component elevator=new ElevatorComponent();
+	
+}	

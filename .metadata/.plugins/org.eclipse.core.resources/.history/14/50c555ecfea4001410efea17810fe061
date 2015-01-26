@@ -1,0 +1,17 @@
+package org.usfirst.frc.team1389.robot;
+
+import java.util.ArrayList;
+
+public class TeleopControl extends Control{
+	final boolean invertedX = true;
+	final boolean invertedY = false;
+	private ArrayList<Component> components;
+	public TeleopControl(ArrayList<Component> components){
+		this.components=components;
+	}
+	public void tick(){
+		double x = Robot.state.drive.getLeftX()*(invertedX?1:-1);
+		double y = Robot.state.drive.getLeftY()*(invertedY?1:-1);
+		driver.drive(x,y);
+	}
+}

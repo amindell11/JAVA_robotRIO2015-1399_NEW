@@ -1,0 +1,12 @@
+package org.usfirst.frc.team1389.robot;
+
+import java.util.ArrayList;
+
+public class Bank {
+	ArrayList<Component> components;
+	public static InputState state;
+	public static Control control;
+	public static Component drive=new DriveComponent();
+	public static Component elevator=new ElevatorComponent();
+	
+}	
