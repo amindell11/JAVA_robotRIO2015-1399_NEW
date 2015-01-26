@@ -24,6 +24,7 @@ public class Robot extends IterativeRobot {
 	//instance variables
 	public Control control;
 
+	
 	/**Instantiates all component objects and input state
 	 */
 	public Robot(){

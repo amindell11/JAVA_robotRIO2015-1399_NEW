@@ -3,14 +3,15 @@ import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveComponent extends Component{
-	final AssistedRampUp rampUpState=AssistedRampUp.COMPUTER_ASSISTED;
-	final boolean encoderVerified=false;
-	double actualLeft = 0, actualRight = 0;
-	double leftCoef=1,rightCoef=1;
 	Talon RFDrive;
 	Talon RBDrive;
 	Talon LFDrive;
 	Talon LBDrive;
+	final boolean encoderVerified=false;
+	final AssistedRampUp rampUpState=AssistedRampUp.COMPUTER_ASSISTED;
+
+	double actualLeft = 0, actualRight = 0;
+
 	public DriveComponent() {
 		componentType="Drive";
 		RFDrive = new Talon(Constants.RF_PWM_DRIVE);
@@ -22,43 +23,29 @@ public class DriveComponent extends Component{
 	public void drive(double x,double y){
 		double leftPower=(y + x) / Constants.LIMITER;
 		double rightPower=(y - x) / Constants.LIMITER * -1;
-		verifyEncoders(leftPower,rightPower);
-		leftPower*=leftCoef;
-		rightPower*=rightCoef;
-		controlAcceleration(leftPower,actualLeft);
-		controlAcceleration(rightPower,actualRight);
+		verifyPower()
+		controlAcceleration(actualLeft,leftPower);
+		controlAcceleration(actualRight,rightPower);
+		powerToMotors();
+		SmartDashboard.putNumber("Power", (double)((int)(100*((actualLeft + actualRight) / 2)))/100);
+	}
+	
+	private void powerToMotors() {
 		LFDrive.set(actualLeft);
 		LBDrive.set(actualLeft);
 		RFDrive.set(actualRight);
 		RBDrive.set(actualRight);
-		SmartDashboard.putNumber("average Power", (double)((int)(100*((actualLeft + actualRight) / 2)))/100);
-	}
-	
-	private void verifyEncoders(double leftPower, double rightPower) {
-		final double addend=.1;
-		Encoder leftEncoder=Storage.state.encoder1;
-		Encoder rightEncoder=Storage.state.encoder2;
-		double powerRatio=leftPower/rightPower;
-		double encoderRatio=leftEncoder.getRate()/rightEncoder.getRate();
-		if(powerRatio>encoderRatio){
-			leftCoef-=addend*leftPower!=0?(Math.abs(leftPower)/leftPower):0;
-			rightCoef+=addend*leftPower!=0?(Math.abs(rightPower)/rightPower):0;
-		}
-		else if(powerRatio<encoderRatio){
-			leftCoef+=addend*leftPower!=0?(Math.abs(leftPower)/leftPower):0;
-			rightCoef-=addend*leftPower!=0?(Math.abs(rightPower)/rightPower):0;
-		}
 	}
 
-	private void controlAcceleration(double power, double actualPower) {
+	private void controlAcceleration(double actualLeft,double leftPower) {
 		if(rampUpState==AssistedRampUp.COMPUTER_ASSISTED){
-			actualPower=AssistedPowerControl(power,actualPower);
+			actualLeft=AssistedPowerControl(leftPower,actualLeft);
 		}
 		else if(rampUpState==AssistedRampUp.STRICT_COMPUTER){
-			actualPower=PowerControl(power,actualPower);
+			actualLeft=PowerControl(leftPower,actualLeft);
 		}
 		else{
-			actualPower=power;
+			actualLeft=leftPower;
 		}
 	}
 
